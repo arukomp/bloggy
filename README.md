@@ -1,0 +1,5 @@
+# Bloggy!
+
+## Installation
+
+WIP
