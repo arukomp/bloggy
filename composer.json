@@ -1,7 +1,7 @@
 {
     "name": "arukomp/bloggy",
     "description": "A plug-in Blog component for your Laravel project",
-    "type": "project",
+    "type": "library",
     "authors": [
         {
             "name": "Arunas Skirius",
@@ -16,6 +16,7 @@
         "predis/predis": "^1.1"
     },
     "require-dev": {
+        "orchestra/testbench": "~3.0",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
@@ -26,19 +27,18 @@
             "Arukomp\\Bloggy\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Arukomp\\Bloggy\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "Arukomp\\Bloggy\\BloggyServiceProvider",
-                "Arukomp\\Bloggy\\Providers\\ComposerServiceProvider"
+                "Arukomp\\Bloggy\\Providers\\ViewComposerServiceProvider"
             ],
             "aliases": {}
         }
-    },
-    "scripts": {
-        "post-update-cmd": [
-            "php artisan vendor:publish --tag=bloggy_config --force",
-            "php artisan vendor:publish --tag=bloggy_assets --force"
-        ]
     }
 }

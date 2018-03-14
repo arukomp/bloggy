@@ -22,15 +22,9 @@
             </span>
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
-                    <a class="nav-link" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                        Sign Out
+                    <a class="nav-link" href="{{ url(config('app.url')) }}">
+                        Back to Main Site
                     </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                    </form>
                 </li>
             </ul>
         </nav>

@@ -14,6 +14,6 @@ class TrashedPostsController extends Controller
         $posts = $postType->posts()->onlyTrashed()->get();
         $activePostsCount = $postType->posts()->count();
 
-        return view('admin.posts.index', compact('postType', 'posts', 'activePostsCount'));
+        return view('bloggy::admin.posts.index', compact('postType', 'posts', 'activePostsCount'));
     }
 }

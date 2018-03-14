@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Stubs;
+namespace Arukomp\Bloggy\Tests\Stubs;
 
 class ValidationModelWithValidationMessagesStub extends ValidationModelStub
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Stubs;
+namespace Arukomp\Bloggy\Tests\Stubs;
 
 use Illuminate\Database\Eloquent\Model;
 use Arukomp\Bloggy\Models\Traits\ValidatesModel;

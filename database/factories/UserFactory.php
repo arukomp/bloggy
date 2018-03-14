@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\User;
+use Arukomp\Bloggy\Tests\Stubs\User;
 
 /*
 |--------------------------------------------------------------------------

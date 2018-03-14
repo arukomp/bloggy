@@ -1,18 +1,18 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Arukomp\Bloggy\Tests\Feature\Admin;
 
-use App\User;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Arukomp\Bloggy\Models\Post;
+use Arukomp\Bloggy\Tests\TestCase;
 use Arukomp\Bloggy\Models\PostType;
+use Arukomp\Bloggy\Tests\Stubs\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PostsControllerTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     protected $user;
 
@@ -34,7 +34,8 @@ class PostsControllerTest extends TestCase
         $posts = factory(Post::class, 2)->create();
         $trashedPost = factory(Post::class)->create(['deleted_at' => \Carbon\Carbon::now()]);
 
-        $this->get(route('admin.postType.posts.index', $this->postType))
+        $this->withoutExceptionHandling()
+            ->get(route('admin.postType.posts.index', $this->postType))
             ->assertStatus(200)
             ->assertSeeText($posts[0]->title)
             ->assertSeeText($posts[1]->title)
@@ -50,8 +51,7 @@ class PostsControllerTest extends TestCase
         $posts = factory(Post::class, 2)->create(['deleted_at' => \Carbon\Carbon::now()]);
         $normalPost = factory(Post::class)->create();
 
-        $this->withoutExceptionHandling()
-            ->get(route('admin.postType.trashedPosts.index', $this->postType))
+        $this->get(route('admin.postType.trashedPosts.index', $this->postType))
             ->assertStatus(200)
             ->assertSeeText($posts[0]->title)
             ->assertSeeText($posts[1]->title)
@@ -78,7 +78,7 @@ class PostsControllerTest extends TestCase
     public function itCanCreateANewPost()
     {
         $this->get(route('admin.postType.posts.create', $this->postType))
-            ->assertViewIs('admin.posts.create')
+            ->assertViewIs('bloggy::admin.posts.create')
             ->assertSeeText('Add a new ' . $this->postType->name);
     }
 
@@ -106,7 +106,7 @@ class PostsControllerTest extends TestCase
 
         $post = Post::first();
 
-        $response->assertViewIs('admin.posts.edit')
+        $response->assertViewIs('bloggy::admin.posts.edit')
             ->assertViewHas('post', $post);
     }
 
@@ -134,7 +134,7 @@ class PostsControllerTest extends TestCase
 
         $post = Post::first();
 
-        $response->assertViewIs('admin.posts.edit')
+        $response->assertViewIs('bloggy::admin.posts.edit')
             ->assertViewHas('post', $post);
     }
 
@@ -172,7 +172,7 @@ class PostsControllerTest extends TestCase
         $post = factory(Post::class)->create()->first();
 
         $this->get(route('admin.posts.edit', $post))
-            ->assertViewIs('admin.posts.edit')
+            ->assertViewIs('bloggy::admin.posts.edit')
             ->assertViewHas('post', $post)
             ->assertSeeText('Edit ' . $this->postType->name . ': ' . str_limit($post->title, 45))
             ->assertSeeText('Preview')
@@ -191,7 +191,7 @@ class PostsControllerTest extends TestCase
             'title' => $newTitle,
             'body' => $newBody,
             'allow_comments' => false
-        ])->assertViewIs('admin.posts.edit');
+        ])->assertViewIs('bloggy::admin.posts.edit');
 
         $this->assertDatabaseHas('posts', [
             'id' => $post->id,

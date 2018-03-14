@@ -3,7 +3,6 @@
 namespace Arukomp\Bloggy\Models;
 
 use Auth;
-use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -57,7 +56,7 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(config('bloggy.user_class'));
     }
 
     public function setActive($active = true)

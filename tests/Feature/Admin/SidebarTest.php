@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Arukomp\Bloggy\Tests\Feature\Admin;
 
-use App\User;
-use Tests\TestCase;
+use Arukomp\Bloggy\Tests\TestCase;
 use Arukomp\Bloggy\Models\PostType;
+use Arukomp\Bloggy\Tests\Stubs\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

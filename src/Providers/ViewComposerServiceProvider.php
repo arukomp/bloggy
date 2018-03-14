@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Arukomp\Bloggy\Http\ViewComposers\Admin\SidebarComposer;
 
-class ComposerServiceProvider extends ServiceProvider
+class ViewComposerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.

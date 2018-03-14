@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+namespace Arukomp\Bloggy\Tests\Feature;
 
-use App\User;
-use Tests\TestCase;
+use Arukomp\Bloggy\Tests\TestCase;
 use Arukomp\Bloggy\Models\PostType;
+use Arukomp\Bloggy\Tests\Stubs\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -28,7 +28,7 @@ class PostTypesControllerTest extends TestCase
         $postTypes = PostType::all();
 
         $this->get(route('admin.postTypes.index'))
-            ->assertViewIs('admin.postTypes.index')
+            ->assertViewIs('bloggy::admin.postTypes.index')
             ->assertViewHas('postTypes', $postTypes)
             ->assertSeeText($postTypes[0]->name)
             ->assertSeeText($postTypes[1]->name);
@@ -38,7 +38,7 @@ class PostTypesControllerTest extends TestCase
     public function itCanCreatePostTypes()
     {
         $this->get(route('admin.postTypes.create'))
-            ->assertViewIs('admin.postTypes.create')
+            ->assertViewIs('bloggy::admin.postTypes.create')
             ->assertSeeText('Add a new Post Type');
     }
 
@@ -93,7 +93,7 @@ class PostTypesControllerTest extends TestCase
         $postType = factory(PostType::class)->create()->first();
 
         $this->get(route('admin.postTypes.edit', $postType))
-            ->assertViewIs('admin.postTypes.edit')
+            ->assertViewIs('bloggy::admin.postTypes.edit')
             ->assertViewHas('postType', $postType);
     }
 
@@ -105,7 +105,7 @@ class PostTypesControllerTest extends TestCase
         $postType = PostType::withTrashed()->first();
 
         $this->get(route('admin.postTypes.edit', $postType))
-            ->assertViewIs('admin.postTypes.edit')
+            ->assertViewIs('bloggy::admin.postTypes.edit')
             ->assertViewHas('postType', $postType);
     }
 

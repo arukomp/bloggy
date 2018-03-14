@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Unit;
+namespace Arukomp\Bloggy\Tests\Unit;
 
-use Tests\TestCase;
+use Arukomp\Bloggy\Tests\TestCase;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Stubs\ValidationModelStub;
-use Tests\Stubs\ValidationModelWithValidationMessagesStub;
+use Arukomp\Bloggy\Tests\Stubs\ValidationModelStub;
+use Arukomp\Bloggy\Tests\Stubs\ValidationModelWithValidationMessagesStub;
 use Illuminate\Support\Facades\Route;
 
 class ValidatesModelTraitTest extends TestCase

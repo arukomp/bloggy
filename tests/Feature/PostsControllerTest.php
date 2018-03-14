@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Feature;
+namespace Arukomp\Bloggy\Tests\Feature;
 
-use App\User;
-use Tests\TestCase;
+use Arukomp\Bloggy\Tests\Stubs\User;
+use Arukomp\Bloggy\Tests\TestCase;
 use Arukomp\Bloggy\Models\Post;
 use Arukomp\Bloggy\Models\PostType;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -39,7 +39,7 @@ class PostsControllerTest extends TestCase
 
         $response = $this->get($post->url)
             ->assertStatus(200)
-            ->assertViewIs('posts.show')
+            ->assertViewIs('bloggy::posts.show')
             ->assertViewHas('post', $post)
             ->assertSeeText($post->title)
             ->assertSee($post->body)
@@ -75,7 +75,8 @@ class PostsControllerTest extends TestCase
     {
         $post = factory(Post::class)->create(['active' => false])->first();
 
-        $this->actingAs($this->user)->get($post->url)
+        $this->withoutExceptionHandling()
+        ->actingAs($this->user)->get($post->url)
             ->assertStatus(200)
             ->assertSeeText($post->title)
             ->assertSeeText('Draft (Not Published)');
@@ -102,7 +103,7 @@ class PostsControllerTest extends TestCase
 
         $this->get('/' . $post->type->slug . '/hello-world')
             ->assertStatus(200)
-            ->assertViewIs('posts.show')
+            ->assertViewIs('bloggy::posts.show')
             ->assertViewHas('post', $post);
     }
 

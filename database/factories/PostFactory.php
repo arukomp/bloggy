@@ -1,8 +1,8 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Models\Post;
-use App\User;
+use Arukomp\Bloggy\Models\Post;
+use Arukomp\Bloggy\Tests\Stubs\User;
 use Arukomp\Bloggy\Models\PostType;
 
 $factory->define(Post::class, function (Faker $faker) {
