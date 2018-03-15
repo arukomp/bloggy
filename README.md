@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/arukomp/bloggy.svg?branch=master)](https://travis-ci.org/arukomp/bloggy) [![StyleCI](https://styleci.io/repos/124954313/shield?branch=master)](https://styleci.io/repos/124954313)
+[![Build Status](https://travis-ci.org/arukomp/bloggy.svg?branch=master)](https://travis-ci.org/arukomp/bloggy) [![StyleCI](https://styleci.io/repos/124954313/shield?branch=master)](https://styleci.io/repos/124954313) [![Maintainability](https://api.codeclimate.com/v1/badges/b7ae2f8bb34bc281dcce/maintainability)](https://codeclimate.com/github/arukomp/bloggy/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/b7ae2f8bb34bc281dcce/test_coverage)](https://codeclimate.com/github/arukomp/bloggy/test_coverage)
 
 # Bloggy!
 
