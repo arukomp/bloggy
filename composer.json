@@ -2,6 +2,7 @@
     "name": "arukomp/bloggy",
     "description": "A plug-in Blog component for your Laravel project",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Arunas Skirius",
