@@ -2,10 +2,10 @@
 
 namespace Arukomp\Bloggy\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use Arukomp\Bloggy\Http\Controllers\Controller;
 use Arukomp\Bloggy\Models\Post;
 use Arukomp\Bloggy\Models\PostType;
+use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
@@ -98,49 +98,49 @@ class PostsController extends Controller
 
     protected function getPostCreatedMessage($post)
     {
-        return 'Post ' . $this->getPostLink($post) .
-            ' created successfully!' . $this->getAlertButtonsFor($post);
+        return 'Post '.$this->getPostLink($post).
+            ' created successfully!'.$this->getAlertButtonsFor($post);
     }
 
     protected function getPostUpdatedMessage($post)
     {
-        return 'Post ' . $this->getPostLink($post) .
-            ' updated successfully!' . $this->getAlertButtonsFor($post);
+        return 'Post '.$this->getPostLink($post).
+            ' updated successfully!'.$this->getAlertButtonsFor($post);
     }
 
     protected function getPostPublishedMessage($post)
     {
-        return 'Post ' . $this->getPostLink($post) .
-            ' has been published.' . $this->getAlertButtonsFor($post);
+        return 'Post '.$this->getPostLink($post).
+            ' has been published.'.$this->getAlertButtonsFor($post);
     }
 
     protected function getPostUnpublishedMessage($post)
     {
-        return 'Post ' . $this->getPostLink($post) .
-            ' is no longer published.' . $this->getAlertButtonsFor($post);
+        return 'Post '.$this->getPostLink($post).
+            ' is no longer published.'.$this->getAlertButtonsFor($post);
     }
 
     protected function getPostDeletedMessage($post)
     {
-        return 'Post ' . $this->getPostLink($post) .
-            ' has been trashed.' . $this->getAlertButtonsFor($post);
+        return 'Post '.$this->getPostLink($post).
+            ' has been trashed.'.$this->getAlertButtonsFor($post);
     }
 
     protected function getPostRestoredMessage($post)
     {
-        return 'Post ' . $this->getPostLink($post) .
-            ' has been restored.' . $this->getAlertButtonsFor($post);
+        return 'Post '.$this->getPostLink($post).
+            ' has been restored.'.$this->getAlertButtonsFor($post);
     }
 
     protected function getPostLink($post)
     {
-        return '<a class="alert-link" href="' . route('admin.posts.edit', $post) . '">' . str_limit($post->title, 50) . '</a>';
+        return '<a class="alert-link" href="'.route('admin.posts.edit', $post).'">'.str_limit($post->title, 50).'</a>';
     }
 
     protected function getAlertButtonsFor($post)
     {
-        return '<span class="float-right">' .
-                '<a href="'. route('admin.posts.edit', $post) .'" class="alert-link">View</a>' .
+        return '<span class="float-right">'.
+                '<a href="'.route('admin.posts.edit', $post).'" class="alert-link">View</a>'.
             '</span>';
     }
 }

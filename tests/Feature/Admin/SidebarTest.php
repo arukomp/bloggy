@@ -2,10 +2,9 @@
 
 namespace Arukomp\Bloggy\Tests\Feature\Admin;
 
-use Arukomp\Bloggy\Tests\TestCase;
 use Arukomp\Bloggy\Models\PostType;
 use Arukomp\Bloggy\Tests\Stubs\User;
-use Illuminate\Foundation\Testing\WithFaker;
+use Arukomp\Bloggy\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SidebarTest extends TestCase

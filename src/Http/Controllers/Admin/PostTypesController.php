@@ -2,11 +2,10 @@
 
 namespace Arukomp\Bloggy\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use Arukomp\Bloggy\Http\Controllers\Controller;
-use Arukomp\Bloggy\Models\PostType;
 use Arukomp\Bloggy\Http\Requests\PostTypeCreateRequest;
 use Arukomp\Bloggy\Http\Requests\PostTypeUpdateRequest;
+use Arukomp\Bloggy\Models\PostType;
 
 class PostTypesController extends Controller
 {
@@ -37,7 +36,8 @@ class PostTypesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(PostTypeCreateRequest $request)
@@ -45,13 +45,14 @@ class PostTypesController extends Controller
         $postType = PostType::create($request->all());
 
         return redirect()->route('admin.postTypes.index')
-            ->with('success', 'Post Type ' . $postType->name . ' has been created.');
+            ->with('success', 'Post Type '.$postType->name.' has been created.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -62,7 +63,8 @@ class PostTypesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,8 +82,9 @@ class PostTypesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(PostTypeUpdateRequest $request, $id)
@@ -96,13 +99,14 @@ class PostTypesController extends Controller
         $postType->update($request->all());
 
         return redirect()->route('admin.postTypes.edit', $postType)
-            ->with('success', 'Post Type ' . $postType->name . ' has been updated');
+            ->with('success', 'Post Type '.$postType->name.' has been updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -116,13 +120,14 @@ class PostTypesController extends Controller
 
         $postType->delete();
 
-        return redirect()->back()->with('success', 'Post Type ' . $postType->name . ' has been deleted');
+        return redirect()->back()->with('success', 'Post Type '.$postType->name.' has been deleted');
     }
 
     /**
-     * Restore a specified resource
+     * Restore a specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function restore($id)
@@ -136,6 +141,6 @@ class PostTypesController extends Controller
 
         $postType->restore();
 
-        return redirect()->back()->with('success', 'Post Type ' . $postType->name . ' has been restored');
+        return redirect()->back()->with('success', 'Post Type '.$postType->name.' has been restored');
     }
 }

@@ -2,10 +2,9 @@
 
 namespace Arukomp\Bloggy\Tests\Feature;
 
-use Arukomp\Bloggy\Tests\TestCase;
 use Arukomp\Bloggy\Models\PostType;
 use Arukomp\Bloggy\Tests\Stubs\User;
-use Illuminate\Foundation\Testing\WithFaker;
+use Arukomp\Bloggy\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PostTypesControllerTest extends TestCase
@@ -48,19 +47,19 @@ class PostTypesControllerTest extends TestCase
         $postType = factory(PostType::class)->make();
 
         $this->post(route('admin.postTypes.store'), [
-            'name' => $postType->name,
-            'plural' => $postType->plural,
-            'slug' => str_slug($postType->name),
+            'name'        => $postType->name,
+            'plural'      => $postType->plural,
+            'slug'        => str_slug($postType->name),
             'description' => $postType->description,
         ]);
 
         $this->assertDatabaseHas('post_types', [
-            'name' => $postType->name,
-            'plural' => $postType->plural,
+            'name'        => $postType->name,
+            'plural'      => $postType->plural,
             'description' => $postType->description,
-            'slug' => str_slug($postType->name, '-'),
-            'created_by' => $this->user->id,
-            'deleted_at' => null
+            'slug'        => str_slug($postType->name, '-'),
+            'created_by'  => $this->user->id,
+            'deleted_at'  => null,
         ]);
     }
 
@@ -68,22 +67,22 @@ class PostTypesControllerTest extends TestCase
     public function itCannotStorePostTypeWithInvalidData()
     {
         $this->post(route('admin.postTypes.store'), [
-                'name' => '',
+                'name'   => '',
                 'plural' => '',
-                'slug' => ''
+                'slug'   => '',
             ])->assertSessionHasErrors([
-                'name' => 'Name is required',
+                'name'   => 'Name is required',
                 'plural' => 'Plural form is required',
-                'slug' => 'URL slug is required'
+                'slug'   => 'URL slug is required',
             ]);
 
         $postType = factory(PostType::class)->create();
 
         $this->post(route('admin.postTypes.store'), [
                 'name' => 'hello',
-                'slug' => $postType->slug
+                'slug' => $postType->slug,
             ])->assertSessionHasErrors([
-                'slug' => $postType->slug . ' slug is already in use by a different post type'
+                'slug' => $postType->slug.' slug is already in use by a different post type',
             ]);
     }
 
@@ -115,16 +114,16 @@ class PostTypesControllerTest extends TestCase
         $postType = factory(PostType::class)->create();
 
         $this->put(route('admin.postTypes.update', $postType), [
-            'name' => 'hello',
+            'name'   => 'hello',
             'plural' => 'hellos',
-            'slug' => 'test',
+            'slug'   => 'test',
         ]);
 
         $this->assertDatabaseHas('post_types', [
-            'id' => $postType->id,
-            'name' => 'hello',
+            'id'     => $postType->id,
+            'name'   => 'hello',
             'plural' => 'hellos',
-            'slug' => 'test'
+            'slug'   => 'test',
         ]);
     }
 
@@ -134,22 +133,22 @@ class PostTypesControllerTest extends TestCase
         $postType = factory(PostType::class)->create();
 
         $this->put(route('admin.postTypes.update', $postType), [
-                'name' => '',
+                'name'   => '',
                 'plural' => '',
-                'slug' => ''
+                'slug'   => '',
             ])->assertSessionHasErrors([
-                'name' => 'Name is required',
+                'name'   => 'Name is required',
                 'plural' => 'Plural form is required',
-                'slug' => 'URL slug is required'
+                'slug'   => 'URL slug is required',
             ]);
 
         $anotherPostType = factory(PostType::class)->create();
 
         $this->put(route('admin.postTypes.update', $postType), [
                 'name' => $anotherPostType->name,
-                'slug' => $anotherPostType->slug
+                'slug' => $anotherPostType->slug,
             ])->assertSessionHasErrors([
-                'slug' => $anotherPostType->slug . ' slug is already in use by a different post type'
+                'slug' => $anotherPostType->slug.' slug is already in use by a different post type',
             ]);
     }
 
@@ -159,9 +158,9 @@ class PostTypesControllerTest extends TestCase
         $postType = factory(PostType::class)->create();
 
         $this->put(route('admin.postTypes.update', $postType), [
-                'name' => $postType->name,
+                'name'   => $postType->name,
                 'plural' => $postType->plural,
-                'slug' => $postType->slug
+                'slug'   => $postType->slug,
             ])->assertSessionMissing('erorrs');
     }
 

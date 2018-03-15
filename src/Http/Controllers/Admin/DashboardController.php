@@ -2,7 +2,6 @@
 
 namespace Arukomp\Bloggy\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use Arukomp\Bloggy\Http\Controllers\Controller;
 use Arukomp\Bloggy\Models\PostType;
 

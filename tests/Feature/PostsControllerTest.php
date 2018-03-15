@@ -2,11 +2,10 @@
 
 namespace Arukomp\Bloggy\Tests\Feature;
 
-use Arukomp\Bloggy\Tests\Stubs\User;
-use Arukomp\Bloggy\Tests\TestCase;
 use Arukomp\Bloggy\Models\Post;
 use Arukomp\Bloggy\Models\PostType;
-use Illuminate\Foundation\Testing\WithFaker;
+use Arukomp\Bloggy\Tests\Stubs\User;
+use Arukomp\Bloggy\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PostsControllerTest extends TestCase
@@ -97,11 +96,11 @@ class PostsControllerTest extends TestCase
     public function itCanAccessPostSlugInUrl()
     {
         $post = factory(Post::class)->create([
-            'title' => 'Hello World',
-            'active' => true
+            'title'  => 'Hello World',
+            'active' => true,
             ])->first();
 
-        $this->get('/' . $post->type->slug . '/hello-world')
+        $this->get('/'.$post->type->slug.'/hello-world')
             ->assertStatus(200)
             ->assertViewIs('bloggy::posts.show')
             ->assertViewHas('post', $post);
@@ -112,12 +111,12 @@ class PostsControllerTest extends TestCase
     {
         $anotherPostType = factory(PostType::class)->create();
         $post = factory(Post::class)->create([
-            'active' => true,
-            'post_type_id' => $anotherPostType->id
+            'active'       => true,
+            'post_type_id' => $anotherPostType->id,
         ]);
 
-        $this->get('/post/' . $post->id)
-            ->assertRedirect('/' . $anotherPostType->slug . '/' . $post->slug);
+        $this->get('/post/'.$post->id)
+            ->assertRedirect('/'.$anotherPostType->slug.'/'.$post->slug);
     }
 
     /** @test */
@@ -125,7 +124,7 @@ class PostsControllerTest extends TestCase
     {
         $post = factory(Post::class)->create(['active' => true])->first();
 
-        $this->get('/' . $post->type->id . '/' . $post->slug)
+        $this->get('/'.$post->type->id.'/'.$post->slug)
             ->assertRedirect($post->url);
     }
 

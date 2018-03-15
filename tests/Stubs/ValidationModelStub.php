@@ -2,8 +2,8 @@
 
 namespace Arukomp\Bloggy\Tests\Stubs;
 
-use Illuminate\Database\Eloquent\Model;
 use Arukomp\Bloggy\Models\Traits\ValidatesModel;
+use Illuminate\Database\Eloquent\Model;
 
 class ValidationModelStub extends Model
 {
@@ -11,11 +11,11 @@ class ValidationModelStub extends Model
 
     protected $fillable = [
         'first',
-        'second'
+        'second',
     ];
 
     protected $validationRules = [
-        'first' => 'string',
-        'second' => 'integer|max:100'
+        'first'  => 'string',
+        'second' => 'integer|max:100',
     ];
 }

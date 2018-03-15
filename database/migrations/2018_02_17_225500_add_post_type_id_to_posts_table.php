@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddPostTypeIdToPostsTable extends Migration
 {
@@ -20,10 +20,10 @@ class AddPostTypeIdToPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table($this->dbPrefix . 'posts', function (Blueprint $table) {
+        Schema::table($this->dbPrefix.'posts', function (Blueprint $table) {
             $table->integer('post_type_id')->unsigned()->nullable();
 
-            $table->foreign('post_type_id')->references('id')->on($this->dbPrefix . 'post_types');
+            $table->foreign('post_type_id')->references('id')->on($this->dbPrefix.'post_types');
         });
     }
 
@@ -34,7 +34,7 @@ class AddPostTypeIdToPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table($this->dbPrefix . 'posts', function (Blueprint $table) {
+        Schema::table($this->dbPrefix.'posts', function (Blueprint $table) {
             $table->dropForeign(['post_type_id']);
 
             $table->dropColumn(['post_type_id']);
