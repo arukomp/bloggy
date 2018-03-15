@@ -1,21 +1,23 @@
 env:
   global:
     - CC_TEST_REPORTER_ID=e63ee8591893965ffc05ba7fba19d368abad5eb4d25557cccc1c210ffaf4782c
-
+cache:
+  directories:
+    - vendor
 language: php
-
 php:
   - 7.1
-
+  - 7.2
 before_script:
   - composer self-update
   - composer install --no-interaction
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
+  - "./cc-test-reporter before-build"
 script:
   - vendor/bin/phpunit
-
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+notifications:
+  slack:
+    secure: OR90+4JeKNV4AdhvihZCvWlqR4+CXxuXra7w9IfxVO2sDI+RHUyM/nOdPCkgbKLnnbVRi2r5boExX8GdwT6R7Z/t/BgXqy3LHEYG8mEoW5o7YQiV0T4fZxIgda5Cp1bEjoJzYSlMr+bhn93/JLIuqOAzg2uOMjO6Q0XlQWMGTJ9ScMu0rT8Vzi1lzoisbZTAoZcfDeZm9eLJiAvyY6dLXEpVBK+kKlQexrq3ODfaTqD4MeMVUJU/cAY0dE8kzpiO+fNlQrv+RUDsl7Q3cvvIKJuFnUTej7y4utWXRUO6s+FC7mkTwzJvuwBXEXIueNNi072tcOxHDoQFWm6uyp85USLPxDS+MJKA/UL4hRz5qJ9KIBqSFKwFRJEZobBYjJpuhoQX5JuUkkKjiUyucSNJbQN5mQKei8XJrsyaGTmi0gRWvoqU7t/WKp9fWbP95pewgfnVGDFwiP90TnwUE0v6Hhj6+F+lTnRAPml0cW7ACV7C2U58tLMhzbMPdZOI13XGPhxJqDejYkaTa5ybPVbVGpGWEpbLiVrxplKtBmjnQ6GeslgHoomndEFhS7W3Bffv/LdSIFQD6aqBQOr1F26FfRJ6r1Xs5LriKpFm6n0QHJfxfplTyAWH/GG5g5bn1b5b6eHq6wA5iPQSAPxLPl+du0r5hWzQMmwqWTzHeLEWBu0=
