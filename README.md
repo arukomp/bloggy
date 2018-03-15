@@ -1,4 +1,4 @@
-[![StyleCI](https://styleci.io/repos/124954313/shield?branch=master)](https://styleci.io/repos/124954313)
+[![Build Status](https://travis-ci.org/arukomp/bloggy.svg?branch=master)](https://travis-ci.org/arukomp/bloggy) [![StyleCI](https://styleci.io/repos/124954313/shield?branch=master)](https://styleci.io/repos/124954313)
 
 # Bloggy!
 
