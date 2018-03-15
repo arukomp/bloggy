@@ -2,10 +2,9 @@
 
 namespace Arukomp\Bloggy\Http\Controllers;
 
-use Auth;
-use Illuminate\Http\Request;
 use Arukomp\Bloggy\Models\Post;
 use Arukomp\Bloggy\Models\PostType;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -25,7 +24,7 @@ class PostsController extends Controller
             $post = $postType->posts()->when(Auth::check(), function ($query) {
                 $query->withTrashed();
             })->where('slug', $postIdOrSlug)->first();
-    
+
             if (is_null($post)) {
                 $post = Post::find($postIdOrSlug);
                 $redirect = true;

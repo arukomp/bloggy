@@ -24,24 +24,24 @@ class PostTypeUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name'   => 'required',
             'plural' => 'required',
-            'slug' => 'required|unique:post_types,slug'
+            'slug'   => 'required|unique:post_types,slug',
         ];
     }
 
     /**
-     * Validation messages
+     * Validation messages.
      *
      * @return array
      */
     public function messages()
     {
         return [
-            'name.required' => 'Name is required',
+            'name.required'   => 'Name is required',
             'plural.required' => 'Plural form is required',
-            'slug.required' => 'URL slug is required',
-            'slug.unique' => ':input slug is already in use by a different post type'
+            'slug.required'   => 'URL slug is required',
+            'slug.unique'     => ':input slug is already in use by a different post type',
         ];
     }
 }

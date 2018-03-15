@@ -2,16 +2,17 @@
 
 namespace Arukomp\Bloggy\Http\ViewComposers\Admin;
 
-use Illuminate\View\View;
-use Arukomp\Bloggy\Models\PostType;
 use Arukomp\Bloggy\Models\Post;
+use Arukomp\Bloggy\Models\PostType;
+use Illuminate\View\View;
 
 class SidebarComposer
 {
     /**
      * Bind data to the view.
      *
-     * @param  View  $view
+     * @param View $view
+     *
      * @return void
      */
     public function compose(View $view)
@@ -38,6 +39,7 @@ class SidebarComposer
                 $menuItem['active'] = request()->routeIs($menuItem['activeOn']);
                 // $menuItem['active'] = call_user_func([request(), 'routeIs'], $menuItem['activeOn']);
             }
+
             return $menuItem;
         }, $this->getMenu());
     }
@@ -48,27 +50,27 @@ class SidebarComposer
 
         return array_merge([
             [
-                'icon' => 'home',
-                'name' => 'Dashboard',
-                'link' => route('admin.dashboard'),
-                'activeOn' => ['admin.dashboard']
+                'icon'     => 'home',
+                'name'     => 'Dashboard',
+                'link'     => route('admin.dashboard'),
+                'activeOn' => ['admin.dashboard'],
             ],
             [
-                'type' => 'divider'
+                'type' => 'divider',
             ],
             [
-                'icon' => 'file',
-                'name' => 'Post Types',
-                'link' => route('admin.postTypes.index'),
+                'icon'     => 'file',
+                'name'     => 'Post Types',
+                'link'     => route('admin.postTypes.index'),
                 'activeOn' => [
                     'admin.postTypes.index',
                     'admin.postTypes.create',
-                    'admin.postTypes.edit'
-                ]
+                    'admin.postTypes.edit',
+                ],
             ],
             [
-                'type' => 'divider'
-            ]
+                'type' => 'divider',
+            ],
         ], $postTypeLinks);
     }
 
@@ -78,10 +80,10 @@ class SidebarComposer
 
         $links = $postTypes->map(function ($type) {
             return [
-                'icon' => 'file',
-                'name' => ucfirst($type->plural),
-                'link' => route('admin.postType.posts.index', $type),
-                'postTypeId' => $type->id
+                'icon'       => 'file',
+                'name'       => ucfirst($type->plural),
+                'link'       => route('admin.postType.posts.index', $type),
+                'postTypeId' => $type->id,
             ];
         });
 

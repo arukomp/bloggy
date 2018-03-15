@@ -16,7 +16,7 @@ Route::group(['prefix' => 'admin', 'namespace' => '\Arukomp\Bloggy\Http\Controll
 
     Route::resource('postTypes', 'PostTypesController', ['as' => 'admin']);
     Route::resource('trashedPostTypes', 'TrashedPostTypesController', ['as' => 'admin']);
-    
+
     Route::resource('postType.posts', 'PostsController', ['as' => 'admin', 'only' => ['index', 'create', 'store']]);
     Route::resource('posts', 'PostsController', ['as' => 'admin', 'only' => ['edit', 'update', 'destroy']]);
     Route::resource('postType.trashedPosts', 'TrashedPostsController', ['as' => 'admin', 'only' => ['index']]);

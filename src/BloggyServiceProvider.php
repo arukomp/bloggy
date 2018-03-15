@@ -25,13 +25,13 @@ class BloggyServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../publishable/config/bloggy.php',
+            __DIR__.'/../publishable/config/bloggy.php',
             'bloggy'
         );
     }
 
     /**
-     * Load the Bloggy package helpers
+     * Load the Bloggy package helpers.
      *
      * @return void
      */
@@ -43,38 +43,38 @@ class BloggyServiceProvider extends ServiceProvider
     }
 
     /**
-     * Map the Bloggy package routes
+     * Map the Bloggy package routes.
      *
      * @return void
      */
     protected function mapRoutes()
     {
-        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
 
     /**
-     * Load the Bloggy package migrations
+     * Load the Bloggy package migrations.
      *
      * @return void
      */
     protected function loadMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
     /**
-     * Load the Bloggy package views
+     * Load the Bloggy package views.
      *
      * @return void
      */
     protected function loadViews()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bloggy');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'bloggy');
     }
 
     /**
-     * Map the Bloggy package console commands
+     * Map the Bloggy package console commands.
      *
      * @return void
      */
@@ -88,18 +88,18 @@ class BloggyServiceProvider extends ServiceProvider
     }
 
     /**
-     * Publish Bloggy assets
+     * Publish Bloggy assets.
      *
      * @return void
      */
     protected function registerPublishableResources()
     {
-        $publishablePath = dirname(__DIR__) . '/publishable';
+        $publishablePath = dirname(__DIR__).'/publishable';
 
         $publishable = [
             'bloggy_assets' => [
                 "{$publishablePath}/assets/" => public_path(config('bloggy.assets_path')),
-                dirname(__DIR__)."/fonts/" => public_path(config('bloggy.fonts_path')),
+                dirname(__DIR__).'/fonts/'   => public_path(config('bloggy.fonts_path')),
             ],
             'bloggy_config' => [
                 "{$publishablePath}/config/bloggy.php" => config_path('bloggy.php'),
@@ -112,7 +112,7 @@ class BloggyServiceProvider extends ServiceProvider
     }
 
     /**
-     * Map Service container bindings for Bloggy package
+     * Map Service container bindings for Bloggy package.
      *
      * @return void
      */

@@ -2,7 +2,6 @@
 
 namespace Arukomp\Bloggy\Models\Traits;
 
-use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
 trait KeepRevisionHistory
@@ -17,7 +16,7 @@ trait KeepRevisionHistory
     }
 
     /**
-     * Saves the model
+     * Saves the model.
      */
     public function save(array $options = [])
     {
@@ -29,7 +28,7 @@ trait KeepRevisionHistory
     }
 
     /**
-     * Increase the model's revision number
+     * Increase the model's revision number.
      */
     public function increaseRevision($increment = 1)
     {
@@ -40,7 +39,7 @@ trait KeepRevisionHistory
     }
 
     /**
-     * Makes a copy of the model and saves it as history
+     * Makes a copy of the model and saves it as history.
      */
     public function makeHistory()
     {
@@ -54,7 +53,7 @@ trait KeepRevisionHistory
     }
 
     /**
-     * Whether this model is history or not
+     * Whether this model is history or not.
      */
     public function isHistory()
     {
@@ -62,7 +61,7 @@ trait KeepRevisionHistory
     }
 
     /**
-     * Don't include history and don't increase revision
+     * Don't include history and don't increase revision.
      */
     public function withoutHistory()
     {

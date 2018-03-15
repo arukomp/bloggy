@@ -2,9 +2,9 @@
 
 namespace Arukomp\Bloggy\Providers;
 
+use Arukomp\Bloggy\Http\ViewComposers\Admin\SidebarComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Arukomp\Bloggy\Http\ViewComposers\Admin\SidebarComposer;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {

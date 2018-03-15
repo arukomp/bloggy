@@ -2,12 +2,11 @@
 
 namespace Arukomp\Bloggy\Models;
 
+use Arukomp\Bloggy\Models\Traits\KeepRevisionHistory;
+use Arukomp\Bloggy\Models\Traits\ValidatesModel;
 use Auth;
-use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Arukomp\Bloggy\Models\Traits\ValidatesModel;
-use Arukomp\Bloggy\Models\Traits\KeepRevisionHistory;
 
 class Post extends Model
 {
@@ -21,13 +20,13 @@ class Post extends Model
         'body',
         'allow_comments',
         'slug',
-        'post_type_id'
+        'post_type_id',
     ];
 
     protected $dates = ['deleted_at'];
 
     protected $casts = [
-        'active' => 'bool'
+        'active' => 'bool',
     ];
 
     protected $with = ['author', 'type'];
@@ -51,7 +50,7 @@ class Post extends Model
 
     public function getTable()
     {
-        return config('bloggy.database_prefix') . 'posts';
+        return config('bloggy.database_prefix').'posts';
     }
 
     public function author()
@@ -121,26 +120,26 @@ class Post extends Model
     public function getValidationRules()
     {
         return [
-            'title' => 'required|string|max:191',
-            'slug' => 'required|string|max:191',
+            'title'                   => 'required|string|max:191',
+            'slug'                    => 'required|string|max:191',
             'revision_post_parent_id' => 'nullable|integer',
-            'author_id' => 'nullable|integer',
-            'revision' => 'required|integer'
+            'author_id'               => 'nullable|integer',
+            'revision'                => 'required|integer',
         ];
     }
 
     public function getValidationMessages()
     {
         return [
-            'title.required' => 'Post Title is required',
-            'title.string' => 'Post Title must be a string of characters/numbers',
-            'title.max' => 'Post Title cannot be longer than 191 characters',
-            'slug.required' => 'Post URL slug is required',
-            'slug.string' => 'Post URL slug must be a string',
-            'slug.max' => 'Post URL slug cannot be longer then 191 characters',
+            'title.required'    => 'Post Title is required',
+            'title.string'      => 'Post Title must be a string of characters/numbers',
+            'title.max'         => 'Post Title cannot be longer than 191 characters',
+            'slug.required'     => 'Post URL slug is required',
+            'slug.string'       => 'Post URL slug must be a string',
+            'slug.max'          => 'Post URL slug cannot be longer then 191 characters',
             'author_id.integer' => 'An error occurred. Please refresh the page.',
             'revision.required' => 'An error occurred. Please refresh the page.',
-            'revision.integer' => 'An error occurred. Please refresh the page.'
+            'revision.integer'  => 'An error occurred. Please refresh the page.',
         ];
     }
 

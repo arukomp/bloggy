@@ -2,13 +2,11 @@
 
 namespace Arukomp\Bloggy\Tests\Unit;
 
+use Arukomp\Bloggy\Tests\Stubs\ValidationModelStub;
+use Arukomp\Bloggy\Tests\Stubs\ValidationModelWithValidationMessagesStub;
 use Arukomp\Bloggy\Tests\TestCase;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Arukomp\Bloggy\Tests\Stubs\ValidationModelStub;
-use Arukomp\Bloggy\Tests\Stubs\ValidationModelWithValidationMessagesStub;
-use Illuminate\Support\Facades\Route;
 
 class ValidatesModelTraitTest extends TestCase
 {
@@ -16,8 +14,8 @@ class ValidatesModelTraitTest extends TestCase
     public function returnsTrueIfDataIsValid()
     {
         $model = new ValidationModelStub([
-            'first' => 'hello',
-            'second' => 1
+            'first'  => 'hello',
+            'second' => 1,
         ]);
 
         $this->assertTrue($model->isValid());
@@ -27,8 +25,8 @@ class ValidatesModelTraitTest extends TestCase
     public function returnsFalseIfDataIsNotValid()
     {
         $model = new ValidationModelStub([
-            'first' => 1,
-            'second' => 'hello'
+            'first'  => 1,
+            'second' => 'hello',
         ]);
 
         $this->assertFalse($model->isValid());
@@ -38,8 +36,8 @@ class ValidatesModelTraitTest extends TestCase
     public function itCanRetrieveTheFullErrorsBag()
     {
         $model = new ValidationModelWithValidationMessagesStub([
-            'first' => [],
-            'second' => 101
+            'first'  => [],
+            'second' => 101,
         ]);
 
         $this->assertInstanceOf(MessageBag::class, $model->errors());
@@ -50,12 +48,12 @@ class ValidatesModelTraitTest extends TestCase
     public function itCanGetErrorsForFailedValidations()
     {
         $model = new ValidationModelStub([
-            'first' => 1,
-            'second' => 'hello'
+            'first'  => 1,
+            'second' => 'hello',
         ]);
 
         $expectedValidationErrors = [
-            'first' => ['The first must be a string.'],
+            'first'  => ['The first must be a string.'],
             'second' => ['The second must be an integer.'],
         ];
 
@@ -66,13 +64,13 @@ class ValidatesModelTraitTest extends TestCase
     public function itCanHaveCustomValidationMessages()
     {
         $model = new ValidationModelWithValidationMessagesStub([
-            'first' => [],
-            'second' => 101
+            'first'  => [],
+            'second' => 101,
         ]);
 
         $expectedValidationErrors = [
-            'first' => ['First is not a string!'],
-            'second' => ['Second number is too large.']
+            'first'  => ['First is not a string!'],
+            'second' => ['Second number is too large.'],
         ];
 
         $this->assertEquals($expectedValidationErrors, $model->errors()->toArray());
@@ -82,8 +80,8 @@ class ValidatesModelTraitTest extends TestCase
     public function savingAModelWithInvalidDataThrowsAnException()
     {
         $model = new ValidationModelWithValidationMessagesStub([
-            'first' => [],
-            'second' => 101
+            'first'  => [],
+            'second' => 101,
         ]);
 
         $this->expectException(ValidationException::class);
@@ -95,8 +93,8 @@ class ValidatesModelTraitTest extends TestCase
     public function validateMethodReturnsTheModelForChaining()
     {
         $model = new ValidationModelStub([
-            'first' => 'asdf',
-            'second' => 100
+            'first'  => 'asdf',
+            'second' => 100,
         ]);
 
         $this->assertEquals($model, $model->validate());

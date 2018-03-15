@@ -2,22 +2,22 @@
 
 namespace Arukomp\Bloggy\Models\Traits;
 
-use Validator as ValidatorFacade;
 use Illuminate\Support\MessageBag;
-use Illuminate\Validation\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Validator;
+use Validator as ValidatorFacade;
 
 trait ValidatesModel
 {
     /**
-     * Validator instance
+     * Validator instance.
      *
      * @var \Illuminate\Validation\Validator
      */
     private $validator = null;
 
     /**
-     * Constructor for the trait
+     * Constructor for the trait.
      */
     public static function bootValidatesModel()
     {
@@ -29,7 +29,7 @@ trait ValidatesModel
     }
 
     /**
-     * Validation result as true or false
+     * Validation result as true or false.
      *
      * @return bool
      */
@@ -39,7 +39,7 @@ trait ValidatesModel
     }
 
     /**
-     * Runs the actual validation and returns the result as a boolean
+     * Runs the actual validation and returns the result as a boolean.
      *
      * @return bool
      */
@@ -55,7 +55,7 @@ trait ValidatesModel
     }
 
     /**
-     * Get validation errors as an associative array
+     * Get validation errors as an associative array.
      *
      * @return MessageBag
      */
@@ -65,7 +65,7 @@ trait ValidatesModel
     }
 
     /**
-     * Get the validator instance
+     * Get the validator instance.
      *
      * @return \Illuminate\Validation\Validator
      */
@@ -79,7 +79,7 @@ trait ValidatesModel
     }
 
     /**
-     * Get Validation Rules
+     * Get Validation Rules.
      *
      * @return array
      */
@@ -93,7 +93,7 @@ trait ValidatesModel
     }
 
     /**
-     * Get Validation messages
+     * Get Validation messages.
      *
      * @return array
      */

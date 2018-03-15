@@ -14,7 +14,7 @@ class PostType extends Model
         'name',
         'plural',
         'description',
-        'slug'
+        'slug',
     ];
 
     public static function boot()
@@ -28,7 +28,7 @@ class PostType extends Model
 
     public function getTable()
     {
-        return config('bloggy.database_prefix') . 'post_types';
+        return config('bloggy.database_prefix').'post_types';
     }
 
     public static function findBySlug($slug)

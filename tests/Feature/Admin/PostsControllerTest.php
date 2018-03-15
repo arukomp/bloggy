@@ -2,13 +2,12 @@
 
 namespace Arukomp\Bloggy\Tests\Feature\Admin;
 
-use Carbon\Carbon;
 use Arukomp\Bloggy\Models\Post;
-use Arukomp\Bloggy\Tests\TestCase;
 use Arukomp\Bloggy\Models\PostType;
 use Arukomp\Bloggy\Tests\Stubs\User;
+use Arukomp\Bloggy\Tests\TestCase;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PostsControllerTest extends TestCase
 {
@@ -21,7 +20,7 @@ class PostsControllerTest extends TestCase
         parent::setUp();
 
         $this->user = factory(User::class)->create();
-        
+
         $this->actingAs($this->user)
             ->followingRedirects();
 
@@ -41,7 +40,7 @@ class PostsControllerTest extends TestCase
             ->assertSeeText($posts[1]->title)
             ->assertDontSeeText($trashedPost->title)
             ->assertSeeText($this->postType->plural)
-            ->assertSeeText('All ' . $this->postType->plural . ' ' . $posts->count())
+            ->assertSeeText('All '.$this->postType->plural.' '.$posts->count())
             ->assertSeeText('Trashed 1');
     }
 
@@ -56,9 +55,9 @@ class PostsControllerTest extends TestCase
             ->assertSeeText($posts[0]->title)
             ->assertSeeText($posts[1]->title)
             ->assertDontSeeText($normalPost->title)
-            ->assertSeeText('Deleted ' . $this->postType->plural)
-            ->assertSeeText('All ' . $this->postType->plural . ' 1')
-            ->assertSeeText('Trashed ' . $posts->count());
+            ->assertSeeText('Deleted '.$this->postType->plural)
+            ->assertSeeText('All '.$this->postType->plural.' 1')
+            ->assertSeeText('Trashed '.$posts->count());
     }
 
     /** @test */
@@ -79,7 +78,7 @@ class PostsControllerTest extends TestCase
     {
         $this->get(route('admin.postType.posts.create', $this->postType))
             ->assertViewIs('bloggy::admin.posts.create')
-            ->assertSeeText('Add a new ' . $this->postType->name);
+            ->assertSeeText('Add a new '.$this->postType->name);
     }
 
     /** @test */
@@ -88,20 +87,20 @@ class PostsControllerTest extends TestCase
         $samplePostData = factory(Post::class)->make();
 
         $response = $this->post(route('admin.postType.posts.store', $this->postType), [
-            'title' => $samplePostData->title,
-            'body' => $samplePostData->body,
+            'title'          => $samplePostData->title,
+            'body'           => $samplePostData->body,
             'allow_comments' => $samplePostData->allow_comments,
-            'saveAsDraft' => 'Submit'
+            'saveAsDraft'    => 'Submit',
         ]);
 
         $this->assertDatabaseHas('posts', [
-            'title' => $samplePostData->title,
-            'body' => $samplePostData->body,
+            'title'          => $samplePostData->title,
+            'body'           => $samplePostData->body,
             'allow_comments' => 1,
-            'excerpt' => str_limit($samplePostData->body, 350),
-            'slug' => str_slug($samplePostData->title, '-'),
-            'active' => 0,
-            'post_type_id' => $this->postType->id
+            'excerpt'        => str_limit($samplePostData->body, 350),
+            'slug'           => str_slug($samplePostData->title, '-'),
+            'active'         => 0,
+            'post_type_id'   => $this->postType->id,
         ]);
 
         $post = Post::first();
@@ -116,20 +115,20 @@ class PostsControllerTest extends TestCase
         $samplePostData = factory(Post::class)->make();
 
         $response = $this->post(route('admin.postType.posts.store', $this->postType), [
-            'title' => $samplePostData->title,
-            'body' => $samplePostData->body,
+            'title'          => $samplePostData->title,
+            'body'           => $samplePostData->body,
             'allow_comments' => $samplePostData->allow_comments,
-            'publish' => 'Submit'
+            'publish'        => 'Submit',
         ]);
 
         $this->assertDatabaseHas('posts', [
-            'title' => $samplePostData->title,
-            'body' => $samplePostData->body,
+            'title'          => $samplePostData->title,
+            'body'           => $samplePostData->body,
             'allow_comments' => 1,
-            'excerpt' => str_limit($samplePostData->body, 350),
-            'slug' => str_slug($samplePostData->title, '-'),
-            'active' => 1,
-            'post_type_id' => $this->postType->id
+            'excerpt'        => str_limit($samplePostData->body, 350),
+            'slug'           => str_slug($samplePostData->title, '-'),
+            'active'         => 1,
+            'post_type_id'   => $this->postType->id,
         ]);
 
         $post = Post::first();
@@ -147,8 +146,8 @@ class PostsControllerTest extends TestCase
         $this->get(route('admin.posts.publish', $post));
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
-            'active' => true
+            'id'     => $post->id,
+            'active' => true,
         ]);
     }
 
@@ -161,8 +160,8 @@ class PostsControllerTest extends TestCase
         $this->get(route('admin.posts.unpublish', $post));
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
-            'active' => false
+            'id'     => $post->id,
+            'active' => false,
         ]);
     }
 
@@ -174,7 +173,7 @@ class PostsControllerTest extends TestCase
         $this->get(route('admin.posts.edit', $post))
             ->assertViewIs('bloggy::admin.posts.edit')
             ->assertViewHas('post', $post)
-            ->assertSeeText('Edit ' . $this->postType->name . ': ' . str_limit($post->title, 45))
+            ->assertSeeText('Edit '.$this->postType->name.': '.str_limit($post->title, 45))
             ->assertSeeText('Preview')
             ->assertSee(route('posts.show', [$post->type->slug, $post->slug]))
             ->assertSeeText($post->slug);
@@ -185,21 +184,21 @@ class PostsControllerTest extends TestCase
     {
         $post = factory(Post::class)->create()->first();
         $newTitle = $this->faker->sentence;
-        $newBody = $this->faker->text . $this->faker->text;
+        $newBody = $this->faker->text.$this->faker->text;
 
         $this->put(route('admin.posts.update', $post), [
-            'title' => $newTitle,
-            'body' => $newBody,
-            'allow_comments' => false
+            'title'          => $newTitle,
+            'body'           => $newBody,
+            'allow_comments' => false,
         ])->assertViewIs('bloggy::admin.posts.edit');
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
-            'title' => $newTitle,
-            'body' => $newBody,
-            'excerpt' => str_limit($newBody, 350),
+            'id'             => $post->id,
+            'title'          => $newTitle,
+            'body'           => $newBody,
+            'excerpt'        => str_limit($newBody, 350),
             'allow_comments' => false,
-            'slug' => str_slug($newTitle, '-')
+            'slug'           => str_slug($newTitle, '-'),
         ]);
     }
 
@@ -214,19 +213,19 @@ class PostsControllerTest extends TestCase
 
         $this->put(route('admin.posts.update', $post), [
             'excerpt' => $newExcerpt,
-            'slug' => $newSlug,
-            'body' => $newBody,
-            'title' => $newTitle,
+            'slug'    => $newSlug,
+            'body'    => $newBody,
+            'title'   => $newTitle,
         ]);
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
-            'title' => $newTitle,
-            'body' => $newBody,
-            'slug' => $newSlug,
-            'excerpt' => $newExcerpt,
+            'id'             => $post->id,
+            'title'          => $newTitle,
+            'body'           => $newBody,
+            'slug'           => $newSlug,
+            'excerpt'        => $newExcerpt,
             'allow_comments' => $post->allow_comments,
-            'active' => $post->active
+            'active'         => $post->active,
         ]);
     }
 
@@ -249,8 +248,8 @@ class PostsControllerTest extends TestCase
         $this->put(route('admin.posts.restore', $post));
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
-            'deleted_at' => null
+            'id'         => $post->id,
+            'deleted_at' => null,
         ]);
     }
 
@@ -260,23 +259,23 @@ class PostsControllerTest extends TestCase
         $post = factory(Post::class)->create(['title' => 'Hello World', 'active' => true])->first();
 
         $response = $this->post(route('admin.postType.posts.store', $this->postType), [
-                'title' => 'Hello World',
-                'body' => 'asdfasdf',
+                'title'          => 'Hello World',
+                'body'           => 'asdfasdf',
                 'allow_comments' => 1,
-                'publish' => 'Submit'
+                'publish'        => 'Submit',
             ])->assertStatus(200);
 
         $this->assertDatabaseHas('posts', [
             'title' => 'Hello World',
-            'body' => 'asdfasdf',
-            'slug' => 'hello-world'
+            'body'  => 'asdfasdf',
+            'slug'  => 'hello-world',
         ]);
 
         $lastPost = Post::all()->last();
 
         $this->get(route('admin.posts.edit', $post))
-            ->assertSeeText('This slug is shared with these active ' . strtolower($this->postType->plural) . ':')
-            ->assertSeeText('Some or all of these ' . strtolower($this->postType->plural) . ' above might not be accessible by the public')
+            ->assertSeeText('This slug is shared with these active '.strtolower($this->postType->plural).':')
+            ->assertSeeText('Some or all of these '.strtolower($this->postType->plural).' above might not be accessible by the public')
             ->assertSee(route('admin.posts.edit', $lastPost));
     }
 
@@ -287,24 +286,24 @@ class PostsControllerTest extends TestCase
         $secondPostType = factory(PostType::class)->create();
 
         $response = $this->post(route('admin.postType.posts.store', $secondPostType), [
-                'title' => 'Hello World',
-                'body' => 'asdfasdf',
+                'title'          => 'Hello World',
+                'body'           => 'asdfasdf',
                 'allow_comments' => 1,
-                'publish' => 'Submit'
+                'publish'        => 'Submit',
             ])->assertStatus(200);
 
         $this->assertDatabaseHas('posts', [
-            'title' => 'Hello World',
-            'body' => 'asdfasdf',
-            'slug' => 'hello-world',
-            'post_type_id' => $secondPostType->id
+            'title'        => 'Hello World',
+            'body'         => 'asdfasdf',
+            'slug'         => 'hello-world',
+            'post_type_id' => $secondPostType->id,
         ]);
 
         $lastPost = Post::all()->last();
 
         $this->get(route('admin.posts.edit', $first))
-            ->assertDontSeeText('This slug is shared with these active ' . strtolower($this->postType->plural) . ':')
-            ->assertDontSeeText('Some or all of these ' . strtolower($this->postType->plural) . ' above might not be accessible by the public');
+            ->assertDontSeeText('This slug is shared with these active '.strtolower($this->postType->plural).':')
+            ->assertDontSeeText('Some or all of these '.strtolower($this->postType->plural).' above might not be accessible by the public');
     }
 
     /** @test */
@@ -315,15 +314,15 @@ class PostsControllerTest extends TestCase
         $this->get(route('admin.posts.publish', $post));
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
-            'revision' => 1
+            'id'       => $post->id,
+            'revision' => 1,
         ]);
 
         $this->get(route('admin.posts.unpublish', $post));
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
-            'revision' => 1
+            'id'       => $post->id,
+            'revision' => 1,
         ]);
     }
 
@@ -335,8 +334,8 @@ class PostsControllerTest extends TestCase
         $this->put(route('admin.posts.restore', $post));
 
         $this->assertDatabaseHas('posts', [
-            'id' => $post->id,
-            'revision' => 1
+            'id'       => $post->id,
+            'revision' => 1,
         ]);
     }
 }
