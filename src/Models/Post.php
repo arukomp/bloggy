@@ -2,11 +2,11 @@
 
 namespace Arukomp\Bloggy\Models;
 
+use Arukomp\Bloggy\Models\Traits\KeepRevisionHistory;
+use Arukomp\Bloggy\Models\Traits\ValidatesModel;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Arukomp\Bloggy\Models\Traits\ValidatesModel;
-use Arukomp\Bloggy\Models\Traits\KeepRevisionHistory;
 
 class Post extends Model
 {

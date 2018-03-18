@@ -11,7 +11,7 @@ return [
      */
     'database_prefix' => env('BLOGGY_DATABASE_PREFIX', 'bloggy_'),
 
-    /**
+    /*
      * Bloggy routes prefix.
      *
      * Bloggy routes (posts, post types, admin section) will be

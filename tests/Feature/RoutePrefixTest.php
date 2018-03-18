@@ -2,13 +2,11 @@
 
 namespace Arukomp\Bloggy\Tests\Feature;
 
-use Arukomp\Bloggy\Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Arukomp\Bloggy\Models\Post;
 use Arukomp\Bloggy\Tests\Stubs\User;
-use Arukomp\Bloggy\Models\PostType;
+use Arukomp\Bloggy\Tests\TestCase;
 
-class PostsControllerTest extends TestCase
+class RoutePrefixTest extends TestCase
 {
     protected function getEnvironmentSetUp($app)
     {
@@ -43,7 +41,7 @@ class PostsControllerTest extends TestCase
         $post = factory(Post::class)->create([]);
 
         $this->assertEquals(
-            config('app.url').'/test_prefix/'.$post->type->slug . '/' . $post->slug,
+            config('app.url').'/test_prefix/'.$post->type->slug.'/'.$post->slug,
             $post->url
         );
 
