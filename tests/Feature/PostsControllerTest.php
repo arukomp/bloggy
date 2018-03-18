@@ -100,7 +100,7 @@ class PostsControllerTest extends TestCase
             'active' => true,
             ])->first();
 
-        $this->get('/'.$post->type->slug.'/hello-world')
+        $this->get(config('bloggy.routes_prefix').'/'.$post->type->slug.'/hello-world')
             ->assertStatus(200)
             ->assertViewIs('bloggy::posts.show')
             ->assertViewHas('post', $post);
@@ -115,8 +115,8 @@ class PostsControllerTest extends TestCase
             'post_type_id' => $anotherPostType->id,
         ]);
 
-        $this->get('/post/'.$post->id)
-            ->assertRedirect('/'.$anotherPostType->slug.'/'.$post->slug);
+        $this->get(config('bloggy.routes_prefix').'/post/'.$post->id)
+            ->assertRedirect(config('bloggy.routes_prefix').'/'.$anotherPostType->slug.'/'.$post->slug);
     }
 
     /** @test */
@@ -124,7 +124,7 @@ class PostsControllerTest extends TestCase
     {
         $post = factory(Post::class)->create(['active' => true])->first();
 
-        $this->get('/'.$post->type->id.'/'.$post->slug)
+        $this->get(config('bloggy.routes_prefix').'/'.$post->type->id.'/'.$post->slug)
             ->assertRedirect($post->url);
     }
 
