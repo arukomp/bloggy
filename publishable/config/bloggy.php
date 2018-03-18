@@ -11,6 +11,14 @@ return [
      */
     'database_prefix' => env('BLOGGY_DATABASE_PREFIX', 'bloggy_'),
 
+    /**
+     * Bloggy routes prefix.
+     *
+     * Bloggy routes (posts, post types, admin section) will be
+     * offset with this prefix
+     */
+    'routes_prefix' => env('BLOGGY_ROUTES_PREFIX', 'blog'),
+
     /*
      * The user class used as the author of posts created.
      *
